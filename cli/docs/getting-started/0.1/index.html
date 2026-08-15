@@ -37,7 +37,16 @@ with a complete, commented example to uncomment and adjust.
 (see also <a href="/cli/docs/device-supported-boards/0.1/">supported
 boards</a>).</p>
 
-<h2>3. Validate and build</h2>
+<h2>3. Draw the pairing identity</h2>
+<pre>mcuhome device matter-pairing --new living-room-climate</pre>
+<p>Every Matter device needs commissioning credentials of its own, and
+they are drawn exactly once so that every build is byte-identical. The
+values go to the device's own <code>secrets/devices/&lt;name&gt;.yaml</code>
+(never committed); the configuration carries <code>!secret</code>
+references. The bare command — without <code>--new</code> — shows the
+pairing codes again whenever you need them.</p>
+
+<h2>4. Validate and build</h2>
 <pre>mcuhome device validate living-room-climate
 mcuhome device build living-room-climate</pre>
 <p>Validation resolves the configuration and reports every problem at
@@ -46,11 +55,12 @@ host requirements are git and Docker; pull the container once with the
 <code>docker pull</code> command the build prints when it is
 missing.</p>
 
-<h2>4. Flash and commission</h2>
+<h2>5. Flash and commission</h2>
 <p>Flashing over USB and the first-time board setup are being built out
 in this release line; <code>mcuhome device --help</code> shows the
 current state. Once flashed, the device is commissioned into your
-Matter controller with the pairing code the tool prints.</p>
+Matter controller with the pairing code
+<code>mcuhome device matter-pairing</code> shows.</p>
 
 <h2>Where to go next</h2>
 <ul>
