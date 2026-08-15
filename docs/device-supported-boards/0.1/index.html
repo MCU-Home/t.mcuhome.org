@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Supported boards — MCUHome CLI 0.1</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 42rem; margin: 4rem auto; padding: 0 1rem; line-height: 1.6; color: #222; }
+  a { color: #0b62a4; }
+  code { background: #f2f2f2; padding: 0.1em 0.3em; border-radius: 3px; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { text-align: left; padding: 0.4em 0.8em; border-bottom: 1px solid #ddd; vertical-align: top; }
+  h2 { margin-top: 2rem; }
+</style>
+</head>
+<body>
+<h1>Supported boards</h1>
+<p><em>For CLI version 0.1.</em> The authoritative list is always
+<code>mcuhome device boards</code> — it answers from the exact registry
+your installed version builds with.</p>
+
+<h2>Supported and tested</h2>
+<table>
+<tr><th>Board target</th><th>Transports</th><th>Notes</th></tr>
+<tr>
+  <td><code>nrf7002dk/nrf5340/cpuapp</code></td>
+  <td>Thread</td>
+  <td>The reference board. Thread-only: BLE is deliberately off —
+  commissioning happens on-network. Verified end to end against a
+  production Home Assistant.</td>
+</tr>
+</table>
+
+<h2>Planned</h2>
+<table>
+<tr><th>Board target</th><th>Status</th></tr>
+<tr><td><code>nrf52840dk/nrf52840</code></td><td>not brought up yet</td></tr>
+<tr><td><code>nrf52840dongle/nrf52840</code></td><td>brought up as a bare Matter node, but has no I2C bus broken out</td></tr>
+<tr><td><code>nrf54l15dk/nrf54l15/cpuapp</code></td><td>not brought up yet</td></tr>
+</table>
+
+<h2>What about other Zephyr boards?</h2>
+<p>Zephyr itself supports <a
+href="https://docs.zephyrproject.org/latest/boards/index.html">hundreds
+of boards</a>, but MCUHome only accepts boards it has brought up and
+tested: a board entry carries MCUHome-specific knowledge (partition
+layout for over-the-air updates, entropy sources, radio configuration)
+that generic Zephyr support does not provide. New board bring-ups are
+tracked on <a
+href="https://github.com/mcu-home/mcuhome-sdk/issues">the SDK issue
+tracker</a>.</p>
+</body>
+</html>

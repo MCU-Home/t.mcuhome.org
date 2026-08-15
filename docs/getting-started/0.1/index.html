@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Getting started — MCUHome CLI 0.1</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 42rem; margin: 4rem auto; padding: 0 1rem; line-height: 1.6; color: #222; }
+  a { color: #0b62a4; }
+  code, pre { background: #f2f2f2; border-radius: 3px; }
+  code { padding: 0.1em 0.3em; }
+  pre { padding: 0.8em 1em; overflow-x: auto; }
+  h2 { margin-top: 2rem; }
+</style>
+</head>
+<body>
+<h1>Getting started with the MCUHome CLI</h1>
+<p><em>For CLI version 0.1. MCUHome is pre-1.0 — commands and flags may
+still change between minor versions.</em></p>
+
+<p>MCUHome builds Zephyr-based smart-home firmware from a YAML device
+description. Devices speak Matter over Thread or WiFi and work with any
+Matter controller, such as Home Assistant.</p>
+
+<h2>1. Create a project</h2>
+<pre>mkdir my-home &amp;&amp; cd my-home
+mcuhome init</pre>
+<p>A project directory holds your device configurations
+(<code>devices/</code>), your secrets (<code>secrets/</code>, never
+committed), and build output (<code>build/</code>).</p>
+
+<h2>2. Describe a device</h2>
+<pre>mcuhome device new living-room-climate --board nrf7002dk/nrf5340/cpuapp --name "Living Room Climate"</pre>
+<p>This scaffolds <code>devices/living-room-climate/main.yaml</code>
+with a complete, commented example to uncomment and adjust.
+<code>mcuhome device boards</code> lists the boards you can build for
+(see also <a href="/docs/device-supported-boards/0.1/">supported
+boards</a>).</p>
+
+<h2>3. Validate and build</h2>
+<pre>mcuhome device validate living-room-climate
+mcuhome device build living-room-climate</pre>
+<p>Validation resolves the configuration and reports every problem at
+once. A build compiles inside the MCUHome build container — the only
+host requirements are git and Docker; pull the container once with the
+<code>docker pull</code> command the build prints when it is
+missing.</p>
+
+<h2>4. Flash and commission</h2>
+<p>Flashing over USB and the first-time board setup are being built out
+in this release line; <code>mcuhome device --help</code> shows the
+current state. Once flashed, the device is commissioned into your
+Matter controller with the pairing code the tool prints.</p>
+
+<h2>Where to go next</h2>
+<ul>
+  <li><code>mcuhome --help</code> — the full command vocabulary</li>
+  <li><code>mcuhome doctor</code> — checks your environment and says
+  what is missing</li>
+  <li><a href="https://github.com/mcu-home">github.com/mcu-home</a> —
+  source code and issue trackers</li>
+</ul>
+</body>
+</html>
