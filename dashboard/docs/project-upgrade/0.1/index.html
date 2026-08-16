@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>This project cannot be opened — MCUHome dashboard 0.1</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 42rem; margin: 4rem auto; padding: 0 1rem; line-height: 1.6; color: #222; }
+  a { color: #0b62a4; }
+  code, pre { background: #f2f2f2; border-radius: 3px; }
+  code { padding: 0.1em 0.3em; }
+  pre { padding: 0.8em 1em; overflow-x: auto; }
+  h2 { margin-top: 2rem; }
+  .warn { border-left: 4px solid #c47f00; padding: 0.2em 0 0.2em 1em; }
+</style>
+</head>
+<body>
+<h1>The dashboard cannot open this project</h1>
+<p><em>For dashboard version 0.1. MCUHome is pre-1.0 — details may still
+change between minor versions.</em></p>
+
+<p>A project directory states which layout it uses, in the file
+<code>.mcuhome-project-root</code> at its root. The dashboard opens a
+project that already exists; it does not create or upgrade one. When the
+project states a layout the dashboard does not speak, it lists no
+devices and says so, rather than showing you devices that every action
+would then refuse.</p>
+
+<p>Which of these you are looking at decides what to do.</p>
+
+<h2>“The project was written by older tools”</h2>
+<p>The project needs to be upgraded, and something other than the
+dashboard has to do it.</p>
+
+<h3>Home Assistant App</h3>
+<p>You should not see this. The App upgrades the project when it starts,
+so restart the App first. If it comes back, the upgrade is failing —
+check the App's log, which says which migration stopped and why.</p>
+
+<h3>Running the dashboard yourself</h3>
+<p>Upgrade the project with the MCUHome command line, which is a
+separate program you install once:</p>
+<pre>pip install mcuhome
+mcuhome project upgrade /path/to/project</pre>
+<p><strong>Back the project up first</strong> — commit it to git, or copy
+the directory. An upgrade rewrites files in place and cannot be undone.
+Stop the dashboard while it runs. The command shows what it will change
+and asks you to type <code>yes</code> before it does anything.</p>
+<p>The command line's own page has the detail, including how to confirm
+without a terminal and what to do if an upgrade is interrupted:
+<a href="/cli/docs/project-upgrade/0.1/">Upgrading a project</a>.</p>
+
+<h2>“The project was written by newer tools than these”</h2>
+<p>The project is ahead of the dashboard, and a project is never
+downgraded. Update the dashboard — or, in Home Assistant, the App — to a
+version that understands it. Until then, use the machine or the tools
+that wrote the project.</p>
+
+<h2 class="warn">“An upgrade is working on this project”</h2>
+<p>An upgrade renames the project file to
+<code>.mcuhome-project-root.upgrade</code> while it holds the project,
+so this means one is either running right now or was killed halfway.</p>
+<p>If one is running, wait for it. If nothing is running, it was
+interrupted and the project is half-migrated: <strong>restore your
+backup</strong> and upgrade again. MCUHome deliberately does not try to
+repair a partly applied migration, because it cannot know what was
+already done.</p>
+
+<h2>“The project file cannot be read”</h2>
+<p>The marker file is missing, unreadable or not valid. Check the
+directory the dashboard names. Do not edit
+<code>.mcuhome-project-root</code> by hand — MCUHome maintains it, and a
+wrong value there makes the project unusable. Your own settings live in
+<code>mcuhome.yaml</code> next to it.</p>
+
+<h2>Where to go next</h2>
+<ul>
+  <li><a href="/cli/docs/project-upgrade/0.1/">Upgrading a project</a> — the command line's page</li>
+  <li><a href="/cli/docs/getting-started/0.1/">Getting started</a></li>
+</ul>
+</body>
+</html>
