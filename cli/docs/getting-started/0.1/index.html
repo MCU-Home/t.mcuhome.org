@@ -24,10 +24,15 @@ Matter controller, such as Home Assistant.</p>
 
 <h2>1. Create a project</h2>
 <pre>mkdir my-home &amp;&amp; cd my-home
-mcuhome init</pre>
+mcuhome project init</pre>
 <p>A project directory holds your device configurations
 (<code>devices/</code>), your secrets (<code>secrets/</code>, never
-committed), and build output (<code>build/</code>).</p>
+committed), and build output (<code>build/</code>). Keep it in version
+control — <code>mcuhome project init</code> writes a
+<code>.gitignore</code> that leaves your secrets and build output out.
+<code>mcuhome project info</code> tells you what a project is and which
+version of the layout it uses; when a release moves past that layout,
+<a href="/cli/docs/project-upgrade/0.1/">upgrading</a> is one command.</p>
 
 <h2>2. Describe a device</h2>
 <pre>mcuhome device new living-room-climate --board nrf7002dk/nrf5340/cpuapp --name "Living Room Climate"</pre>
