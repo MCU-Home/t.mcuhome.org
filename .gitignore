@@ -1,0 +1,9 @@
+# AI coding-agent files — these live in the workspace, never in a repository
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+.claude/
+.cursor/
+.aider*
+.github/copilot-instructions.md
+
