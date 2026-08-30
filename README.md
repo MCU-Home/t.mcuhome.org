@@ -44,19 +44,36 @@ for as long as it is installed.
 | `cli/` | Pages linked from the command-line interface |
 | `dashboard/` | Pages linked from the web interface |
 
-## Working on this repository
+## Development — how to work on this repository
 
-A page is plain HTML with no build step and no generator, so editing one and
-reloading it is the whole loop; serving the tree instead shows the
-directory-to-`index.html` resolution that every printed link relies on.
+This repository has no tests or linters; `scripts/test` and `scripts/lint`
+say so and exit successfully.
+`bin/` holds the user-facing entry points, `scripts/` the development
+tooling: `scripts/test` and `scripts/lint` dispatch the checks — `all` runs
+every one, `list` names them, `<name>` runs one — and each check is its own
+wrapper in `scripts/test.d/` or `scripts/lint.d/`. The wrappers select
+`.venv` themselves (never activate one by hand) and are exactly what CI
+runs, one job per check.
 
-```
+A page is plain HTML with no build step; serving the tree (rather than
+opening files directly) shows the directory-to-`index.html` resolution
+every printed link relies on. Publication is GitHub Pages serving the
+repository root of `main`, so a merge is a release; a path is added, never
+moved and never removed — a new version of a page takes a new `<version>`
+segment beside the old one.
+
+```sh
 python3 -m http.server --directory . 8000
 ```
 
-Publication is GitHub Pages serving the repository root of `main`, so a merge
-is a release. A path is added, never moved and never removed: a new version of
-a page takes a new `<version>` segment beside the old one.
+```sh
+scripts/test all
+scripts/lint all
+```
+
+The rules that hold across every MCUHome repository — coding standards,
+commits, licensing — are in the organization's
+[contributing guide](https://github.com/mcu-home/.github/blob/main/CONTRIBUTING.md).
 
 ## Documentation
 
